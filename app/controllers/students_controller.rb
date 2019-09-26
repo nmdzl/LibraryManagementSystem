@@ -4,7 +4,7 @@ class StudentsController < ApplicationController
   # GET /students
   # GET /students.json
   def index
-    @students = Student.all
+    @students = Student.all.paginate(:per_page=>10, :page=>params[:page])
   end
 
   # GET /students/1
@@ -54,10 +54,14 @@ class StudentsController < ApplicationController
   # DELETE /students/1
   # DELETE /students/1.json
   def destroy
-    @student.destroy
-    respond_to do |format|
-      format.html { redirect_to students_url, notice: 'Student was successfully destroyed.' }
-      format.json { head :no_content }
+    student_books = Book.find_by(user_id: @user.id)
+    if student_books == nil
+      @student.destroy
+      flash[:notice] = "Student was successfully deleted."
+      redirect_to students_url
+    else
+      flash[:danger] = "Student has books checked out! Can't delete"
+      redirect_to students_url
     end
   end
 
@@ -69,6 +73,6 @@ class StudentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def student_params
-      params.require(:student).permit(:email, :name, :password, :educational_level, :university, :max_book)
+      params.require(:student).permit(:email, :name, :password, :educational_level, :university, :max_book, :is_admin, :is_deleted)
     end
 end

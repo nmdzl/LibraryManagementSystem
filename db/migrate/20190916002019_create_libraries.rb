@@ -4,7 +4,7 @@ class CreateLibraries < ActiveRecord::Migration[5.1]
       t.string :name
       t.string :university
       t.string :location
-      t.intger :max_day
+      t.integer :max_day
       t.integer :overdue_fine
 
       t.timestamps

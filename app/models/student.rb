@@ -9,7 +9,7 @@ class Student < ApplicationRecord
             :uniqueness => {:message => "Email already exists"},
             :email_format => {:message => "Email address is not valid"}
   validates :password,
-            :length => {:minimum => 8 },
+            :length => {:minimum => 6 },
             :presence => {:message => "Please enter password"},
             :allow_nil => true
   has_secure_password

@@ -1,4 +1,4 @@
-class SearchesController < ApplicationController
+ class SearchesController < ApplicationController
 
   # GET /searches
   # GET /searches.json
@@ -33,6 +33,6 @@ class SearchesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def search_params
-      params.require(:search).permit(:isbn, :title,:subject, :author)
+      params.require(:search).permit(:isbn, :published, :title, :subject, :author)
     end
 end

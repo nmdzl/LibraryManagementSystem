@@ -1,6 +1,11 @@
 <%= form_for @search, html:{class: "pure-form"} do |s| %>
 
   <div class="field">
+    <%= s.label :isbn%><br />
+    <%= s.text_field :isbn%>
+  </div>
+
+  <div class="field">
     <%= s.label :published%><br />
     <%= s.text_field :published%>
   </div>

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :books
   resources :searches
   resources :book_histories
   get 'homes/new'

@@ -5,13 +5,38 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-Student.create(name: "Example Student_Admin",
-                email: "example@railstutorial.org",
-                password: "foobar",
-                password_confirmation: "foobar",
-                admin: true)
 
 
+Student.create(name: "Student1",
+               email: "student1@gmail.com",
+               password: "111111",
+               password_confirmation: "111111")
+
+Book.create(title: "Harry Potter",
+            authors: "J.K. Rowling",
+            subject: "Fiction",
+            special_collection: false,
+            published: "Bloomsbury Publishing, [1997]",
+            language: "English",
+            associated_library: "The James B. Hunt Jr. Library",
+            isbn: "9780747532743",
+            editon: "2rd",
+            summary: "Adaptation of the first of J.K. Rowling's popular children's novels about Harry Potter, a boy who learns on his eleventh birthday that he is the orphaned son of two powerful wizards and possesses unique magical powers of his own. He is summoned from his life as an unwanted child to become a student at Hogwarts, an English boarding school for wizards. There, he meets several friends who become his closest allies and help him discover the truth about his parents' mysterious deaths." )
+
+Book.create(title: "Engineering software as a service",
+            authors: "Armando Fox; David Patterson",
+            subject: "Computer Science",
+            special_collection: false,
+            published: "San Francisco, CA : Strawberry Canyon LLC, [2014]",
+            language: "English",
+            associated_library: "The James B. Hunt Jr. Library",
+            isbn: "9780984881239",
+            editon: "2rd",
+            summary: "A one-semester college course in software engineering focusing on cloud computing, software as a service (SaaS), and Agile development using Extreme Programming (XP). This book is neither a step-by-step tutorial nor a reference book. Instead, our goal is to bring a diverse set of software engineering topics together into a single narrative, help readers understand the most important ideas through concrete examples and a learn-by-doing approach, and teach readers enough about each topic to get them started in the field. Courseware for doing the work in the book is available as a virtual machine image that can be downloaded or deployed in the cloud. A free MOOC (massively open online course) at saas-class.org follows the book's content and adds programming assignments and quizzes.")
+
+
+
+=begin
 99.times do |n|
   name = Faker::Name.name
   email = "example-#{n+1}@railstutorial.org"
@@ -36,3 +61,9 @@ end
               published: published)
 end
 
+Student.create(name: "Student_Admin",
+                email: "example@railstutorial.org",
+                password: "111111",
+                password_confirmation: "111111",
+                admin: true)
+=end

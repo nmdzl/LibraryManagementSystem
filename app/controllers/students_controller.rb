@@ -1,6 +1,6 @@
 class StudentsController < ApplicationController
   before_action :set_student, only: [:show, :edit, :update, :destroy]
-  before_action :admin_student, only: :destroy
+#  before_action :admin_student, only: :destroy
 
   # GET /students
   # GET /students.json
@@ -55,7 +55,7 @@ class StudentsController < ApplicationController
   # DELETE /students/1
   # DELETE /students/1.json
   def destroy
-    student_books = Book.find_by(_id: @student.id)
+    student_books = Book.find_by(student_id: @student.id)
     if student_books == nil
       @student.destroy
       flash[:notice] = "Student was successfully deleted."
@@ -65,9 +65,6 @@ class StudentsController < ApplicationController
       redirect_to students_url
     end
 
-    def admin_student
-      redirect_to(root_url) unless current_student.admin
-    end
   end
 
   private

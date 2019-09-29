@@ -1,0 +1,38 @@
+<p id="notice"><%= notice %></p>
+
+<table class="table">
+  <thead>
+  <tr>
+    <th><strong>Title</strong></th>
+    <th><strong>Author(s)</strong></th>
+    <th><strong>Subject</strong></th>
+    <th><strong>Isbn</strong></th>
+    <th><strong>Associated library</strong></th>
+    <th><strong>language</strong></th>
+    <th><strong>Published</strong></th>
+    <th><strong>Special collection</strong></th>
+    <th><strong>Status</strong></th>
+  </tr>
+  </thead>
+  <tbody>
+
+  <tr>
+    <td><%= @book.title %></td>
+    <td><%= @book.authors %></td>
+    <td><%= @book.subject %></td>
+    <td><%= @book.isbn %></td>
+    <td><%= @book.associated_library %></td>
+    <td><%= @book.language %></td>
+    <td><%= @book.published %></td>
+    <td><%= @book.special_collection %></td>
+    <% if @book.is_borrowed %>
+      <td><span class="label label-danger">Checked out</span></td>
+    <%else%>
+      <td><span class="label label-success">Available</span></td>
+    <%end%>
+</table>
+
+<%if @current_student.admin %>
+  <%= link_to 'Edit', edit_book_path(@book), :class => "btn btn-danger", :style => "color: #000000" %> |
+<%end%>
+<%= link_to 'Back', books_path, :class => "btn btn-warning", :style => "color: #000000" %>

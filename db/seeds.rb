@@ -21,3 +21,18 @@ Student.create(name: "Example Student_Admin",
                  password: password,
                  password_confirmation:password)
 end
+
+
+20.times do
+  title = Faker::Book.title
+  authors = Faker::Book.author
+  subject = Faker::Book.genre
+  special_collection = Faker::Boolean.boolean(true_ratio: 0.1)
+  published = Faker::Date.between(from: 30.years.ago, to: Date.today)
+  Book.create(title: title,
+              authors: authors,
+              subject: subject,
+              special_collection: special_collection,
+              published: published)
+end
+

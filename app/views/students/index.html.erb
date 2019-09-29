@@ -23,7 +23,6 @@
         <td><%= student.educational_level %></td>
         <td><%= student.university %></td>
         <td><%= student.max_book %></td>
-        <td><%= student.admin %></td>
         <td><%= link_to 'Show', student %></td>
         <td><%= link_to 'Edit', edit_student_path(student) %></td>
         <td><%=link_to 'View Checkout History', check_student_history_path(:data => {:student_id => student.id, :book_id => nil}), :class => "btn btn-success", :style => "color: #000000"%></td>

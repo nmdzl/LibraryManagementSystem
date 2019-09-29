@@ -1,13 +1,7 @@
-<%= form_with(model: student, local: true) do |form| %>
-  <% if student.errors.any? %>
+<%= form_for(@student) do |form| %>
+  <% if @student.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(student.errors.count, "error") %> prohibited this student from being saved:</h2>
-
-      <ul>
-      <% student.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
     </div>
   <% end %>
 
@@ -36,12 +30,8 @@
     <%= form.text_field :university, id: :student_university %>
   </div>
 
-  <div class="field">
-    <%= form.label :max_book %>
-    <%= form.number_field :max_book, id: :student_max_book %>
-  </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit  :class => 'btn btn-primary' %>
   </div>
 <% end %>

@@ -20,7 +20,7 @@ Book.create(title: "Harry Potter",
             language: "English",
             associated_library: "The James B. Hunt Jr. Library",
             isbn: "9780747532743",
-            editon: "2rd",
+            edition: "2nd",
             summary: "Adaptation of the first of J.K. Rowling's popular children's novels about Harry Potter, a boy who learns on his eleventh birthday that he is the orphaned son of two powerful wizards and possesses unique magical powers of his own. He is summoned from his life as an unwanted child to become a student at Hogwarts, an English boarding school for wizards. There, he meets several friends who become his closest allies and help him discover the truth about his parents' mysterious deaths." )
 
 Book.create(title: "Engineering software as a service",
@@ -31,13 +31,13 @@ Book.create(title: "Engineering software as a service",
             language: "English",
             associated_library: "The James B. Hunt Jr. Library",
             isbn: "9780984881239",
-            editon: "2rd",
+            edition: "2nd",
             summary: "A one-semester college course in software engineering focusing on cloud computing, software as a service (SaaS), and Agile development using Extreme Programming (XP). This book is neither a step-by-step tutorial nor a reference book. Instead, our goal is to bring a diverse set of software engineering topics together into a single narrative, help readers understand the most important ideas through concrete examples and a learn-by-doing approach, and teach readers enough about each topic to get them started in the field. Courseware for doing the work in the book is available as a virtual machine image that can be downloaded or deployed in the cloud. A free MOOC (massively open online course) at saas-class.org follows the book's content and adds programming assignments and quizzes.")
 
 
 
-=begin
-99.times do |n|
+
+20.times do |n|
   name = Faker::Name.name
   email = "example-#{n+1}@railstutorial.org"
   password = "password"
@@ -48,22 +48,29 @@ Book.create(title: "Engineering software as a service",
 end
 
 
-20.times do
+10.times do
+  isbn = Faker::PhoneNumber.subscriber_number(length: 13)
   title = Faker::Book.title
   authors = Faker::Book.author
   subject = Faker::Book.genre
+  #language = Faker::Nation.language
   special_collection = Faker::Boolean.boolean(true_ratio: 0.1)
-  published = Faker::Date.between(from: 30.years.ago, to: Date.today)
-  Book.create(title: title,
+  published = Faker::Address.city + Faker::Book.publisher + " [" + Faker::Number.between(from: 1980, to: 2019).to_s + "]"
+  Book.create(isbn: isbn,
+              title: title,
               authors: authors,
               subject: subject,
+              language: "English",
+              associated_library: "The James B. Hunt Jr. Library",
+              edition: "1st",
               special_collection: special_collection,
               published: published)
 end
 
+
+
 Student.create(name: "Student_Admin",
-                email: "example@railstutorial.org",
+                email: "team587@ncsu.edu",
                 password: "111111",
                 password_confirmation: "111111",
                 admin: true)
-=end

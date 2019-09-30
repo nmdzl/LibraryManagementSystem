@@ -22,7 +22,15 @@
 
 <p>
   <strong>Max book:</strong>
-  <%= @student.max_book %>
+  <% if @student.educational_level == "Undergraduate" %>
+  <p> 2 </p>
+  <% end %>
+  <% if @student.educational_level == "Masters" %>
+  <p> 4 </p>
+  <% end %>
+  <% if @student.educational_level == "PhD" %>
+  <p> 6 </p>
+  <% end %>
 </p>
 
 <%= link_to 'Edit', edit_student_path(@student) %> |

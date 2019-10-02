@@ -1,6 +1,6 @@
 # README
 
-## Herku link:
+## Heroku link:
 
 ## Admin account:
   * email: team587@ncsu.edu

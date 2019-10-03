@@ -6,19 +6,44 @@
   <div class="col-md-6 col-md-offset-3">
     <%= form_for(:session, url: login_path) do |f| %>
 
+      <p>Student Login:</p>
+
       <%= f.label :email %>
       <%= f.email_field :email, class: 'form-control' %>
-      </br>
+
 
       <%= f.label :password %>
       <%= f.password_field :password, class: 'form-control' %>
-      </br>
 
-      <%= f.submit "Log in", class: "btn btn-primary btn-block" %>
       </br>
+      <%= f.submit "Log in", class: "btn btn-primary btn-block" %>
+
     <% end %>
-    </br>
+
     <p>New student? <%= link_to "Sign up now!", signup_path %></p>
-    </div>
   </div>
 </div>
+
+
+<div class="col-md-6 col-md-offset-3">
+  <%= form_for(:session, url: sessions_login_librarian_path) do |f| %>
+
+    <p>Librarian Login:</p>
+
+    <%= f.label :email %>
+    <%= f.email_field :email, class: 'form-control' %>
+
+
+    <%= f.label :password %>
+    <%= f.password_field :password, class: 'form-control' %>
+
+    </br>
+    <%= f.submit "Log in", class: "btn btn-primary btn-block" %>
+
+  <% end %>
+
+  <p>New librarian? <%= link_to "Sign up now!", signup_librarian_path %></p>
+</div>
+
+
+

@@ -1,8 +1,12 @@
-
-<% if @current_student.admin %>
+<%if !@current_student.nil? %>
+<% if @current_student.admin  %>
 
   <div class="btn-group float_btn" role="group">
     <%= link_to "Manage Library", libraries_path, class: "btn btn-xlg btn-info", style: "color: #000"%>
+  </div>
+
+  <div class="btn-group float_btn" role="group">
+    <%= link_to "Manage Librarian", librarians_path, class: "btn btn-xlg btn-info", style: "color: #000"%>
   </div>
 
   <div class="btn-group float_btn" role="group">
@@ -14,13 +18,23 @@
   </div>
 
 <% end %>
+<%end %>
+<%if @current_librarian.nil? %>
 <div class="btn-group float_btn" role="group">
   <%= link_to "Search Books", new_search_path, class: "btn btn-xlg btn-success" , style: "color: #000"%>
 </div>
+  <%end %>
 <div class="btn-group float_btn" role="group">
   <%= link_to "All Books", books_path, class: "btn btn-xlg btn-primary", style: "color: #000"%>
 </div>
-
+<%if !@current_student.nil? %>
 <div class="btn-group float_btn" role="group">
   <%= link_to "My checkout history", check_student_history_path(:data => {:student_id => @current_student.id, :book_id => nil}), class: "btn btn-xlg btn-warning", style: "color: #000"%>
 </div>
+<%end %>
+
+<%if !@current_librarian.nil? %>
+  <div class="btn-group float_btn" role="group">
+    <%= link_to "Change Library", books_path, class: "btn btn-xlg btn-primary", style: "color: #000"%>
+  </div>
+<%end %>

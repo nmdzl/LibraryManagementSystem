@@ -4,9 +4,9 @@ class Book < ApplicationRecord
             :presence => true
   validates :subject,
             :presence => true
- # validates :isbn,
- #           :presence => true,
- #           :uniqueness => true
+  # validates :isbn,
+  #           :presence => true,
+  #           :uniqueness => true
   validates :authors,
             :presence => true
 

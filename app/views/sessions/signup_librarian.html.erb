@@ -1,4 +1,4 @@
-<h1>New Student</h1>
+<h1>New Librarian</h1>
 <!--
 
 <script type="text/javascript">
@@ -18,7 +18,7 @@
 
 </script>-->
 
-<%= form_for @student, :url => {:action =>'new_student'}, :html => {:method => "post"} do |f| %>
+<%= form_for @librarian, :url => {:action =>'new_librarian'}, :html => {:method => "post"} do |f| %>
   <div class="field">
     <%= f.label :name %><br>
     <%= f.text_field :name,  :input_html => {:id=>'name'} %>
@@ -31,13 +31,10 @@
     <%= f.label :email %><br>
     <%= f.text_field :email, :input_html => {:id=>'email'} %>
   </div>
+
   <div class="field">
-    <%= f.label :educational_level %><br>
-    <%= f.text_field :educational_level %>
-  </div>
-  <div class="field">
-    <%= f.label :university, "University" %><br>
-    <%= f.text_field :university %>
+    <%= f.label :library, "Library" %><br>
+    <%= f.text_field :library %> <!--better change into a dropdown list-->
   </div>
   <div class="actions">
     <%= f.submit 'Submit', :class => 'btn btn-primary'%>

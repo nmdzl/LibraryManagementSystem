@@ -1,15 +1,21 @@
 Rails.application.routes.draw do
+  resources :librarians
   resources :books
   resources :searches
   resources :book_histories
   get 'homes/new'
   get 'homes/show' => 'homes#show', :as => :home
+  get 'homes/show_librarian' => 'homes#show_librarian'
   get 'sessions/signup' => 'sessions#signup', :as => :signup
+  get 'sessions/signup_librarian' => 'sessions#signup_librarian', :as => :signup_librarian
   post 'sessions/new_student' => 'sessions#new_student'
+  post 'sessions/new_librarian' => 'sessions#new_librarian'
+  get 'sessions_login_librarian' => 'sessions#new_librarian'
   root :to => 'sessions#new'
   get  'login'   => 'sessions#new', :as => :loginpage
   post 'login'   => 'sessions#create'
-      delete 'logout'  => 'sessions#destroy'
+  post 'sessions_login_librarian'   => 'sessions#create_librarian' #when click login on the login page
+  delete 'logout'  => 'sessions#destroy'
 
   get 'books/:id/borrow' => 'books#borrow', :as => :borrow_book
   get 'book_histories/:data/index' => 'book_histories#index', :as =>:check_student_history

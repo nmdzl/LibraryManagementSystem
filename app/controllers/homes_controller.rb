@@ -4,5 +4,7 @@ class HomesController < ApplicationController
 
   def show
   end
+  def show_librarian
+  end
 end
 

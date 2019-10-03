@@ -39,7 +39,7 @@ Book.create(title: "Engineering software as a service",
 
 20.times do |n|
   name = Faker::Name.name
-  email = "example-#{n+1}@railstutorial.org"
+  email = "example-#{n+1}@ncsu.edu"
   password = "password"
   Student.create(name: name,
                  email: email,
@@ -70,7 +70,7 @@ end
 
 
 Student.create(name: "Student_Admin",
-                email: "team587@ncsu.edu",
-                password: "111111",
-                password_confirmation: "111111",
-                admin: true)
+               email: "team587@ncsu.edu",
+               password: "111111",
+               password_confirmation: "111111",
+               admin: true)

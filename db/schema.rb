@@ -10,15 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190929022032) do
+ActiveRecord::Schema.define(version: 20191002180131) do
 
   create_table "book_histories", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "chk_out_dt"
     t.datetime "chk_in_date"
+    t.integer "student_id"
     t.integer "book_id"
     t.index ["book_id"], name: "index_book_histories_on_book_id"
+    t.index ["student_id"], name: "index_book_histories_on_student_id"
   end
 
   create_table "books", force: :cascade do |t|
@@ -44,6 +46,18 @@ ActiveRecord::Schema.define(version: 20190929022032) do
   create_table "homes", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "librarians", force: :cascade do |t|
+    t.string "name"
+    t.string "email"
+    t.string "password"
+    t.string "library"
+    t.boolean "librarian"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "password_digest"
+    t.boolean "admin"
   end
 
   create_table "libraries", force: :cascade do |t|

@@ -12,12 +12,31 @@ class SessionsController < ApplicationController
       flash.now[:danger] = "Invalid email id or password. Please try again."
       render 'new'
     end
+
+  end
+
+
+  def create_librarian
+    librarian = Librarian.find_by(email: params[:session][:email].downcase)
+    if librarian && librarian.authenticate(params[:session][:password])
+      log_in_librarian librarian
+      redirect_to home_path
+    else
+      flash.now[:danger] = "Invalid email id or password. Please try again."
+      render 'new'
+    end
   end
 
   def signup
     @student = Student.new
     render 'sessions/signup'
   end
+
+  def signup_librarian
+    @librarian = Librarian.new
+    render 'sessions/signup_librarian'
+  end
+
 
   # PATCH/PUT /sessions/1
   # PATCH/PUT /sessions/1.json
@@ -36,14 +55,37 @@ class SessionsController < ApplicationController
     end
   end
 
+
+  def new_librarian
+    @librarian = Librarian.new(librarian_params)
+    begin
+      if @librarian.save!
+        session[:librarian_id] = @librarian.id
+        logged_in_librarian?
+        redirect_to home_path
+      end
+    rescue => error
+      logger.debug "ERROR - gaurav"
+      flash.now[:danger] = "#{error.message}"
+      render 'signup_librarian'
+    end
+  end
+
+
   # DELETE /sessions/1
   # DELETE /sessions/1.json
   def destroy
     log_out
+    log_out_librarian
     redirect_to login_path
   end
 
   def student_params
     params.require(:student).permit(:email, :name, :password, :educational_level, :university, :max_book, :admin, :is_deleted)
   end
+
+  def librarian_params
+    params.require(:librarian).permit(:name, :email, :password, :library) #:librarian
+  end
+
 end

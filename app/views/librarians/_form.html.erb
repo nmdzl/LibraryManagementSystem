@@ -23,7 +23,7 @@
 
   <div class="field">
     <%= form.label :password %>
-    <%= form.text_field :password, id: :librarian_password %>
+    <%= form.password_field :password, id: :librarian_password %>
   </div>
 
   <div class="field">
@@ -31,10 +31,11 @@
     <%= form.text_field :library, id: :librarian_library %>
   </div>
 
-  <div class="field">
+
+  <!--div class="field">
     <%= form.label :librarian %>
     <%= form.check_box :librarian, id: :librarian_librarian %>
-  </div>
+  </div-->
 
   <div class="actions">
     <%= form.submit %>

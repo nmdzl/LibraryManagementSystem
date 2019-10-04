@@ -10,6 +10,7 @@
   <%= @student.name %>
 </p>
 
+<% if !@current_student.admin  %>
 <p>
   <strong>Educational level:</strong>
   <%= @student.educational_level %>
@@ -24,6 +25,8 @@
   <strong>Max book:</strong>
   <%= @student.max_book %>
 </p>
+<% end %>
+
 
 <%= link_to 'Edit', edit_student_path(@student) %> |
-<%= link_to 'Back', students_path %>
+<%= link_to 'Back', home_path %>

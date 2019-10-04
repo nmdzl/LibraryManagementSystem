@@ -1,37 +1,71 @@
-<%= form_for(@student) do |form| %>
-  <% if @student.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(student.errors.count, "error") %> prohibited this student from being saved:</h2>
-    </div>
+<%if !@current_student.nil? %>
+  <% if @current_student.admin  %>
+    <%= form_for(@student) do |form| %>
+      <% if @student.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(student.errors.count, "error") %> prohibited this student from being saved:</h2>
+        </div>
+      <% end %>
+
+      <div class="field">
+        <%= form.label :email %>
+        <%= form.text_field :email, id: :student_email %>
+      </div>
+
+      <div class="field">
+        <%= form.label :name %>
+        <%= form.text_field :name, id: :student_name %>
+      </div>
+
+      <div class="field">
+        <%= form.label :password %>
+        <%= form.password_field :password, id: :student_password %>
+      </div>
+
+      <div class="actions">
+        <%= form.submit "Update Admin", :class => 'btn btn-primary' %>
+      </div>
+    <% end %>
   <% end %>
 
-  <div class="field">
-    <%= form.label :email %>
-    <%= form.text_field :email, id: :student_email %>
-  </div>
 
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name, id: :student_name %>
-  </div>
+  <% if !@current_student.admin  %>
+    <%= form_for(@student) do |form| %>
+      <% if @student.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(student.errors.count, "error") %> prohibited this student from being saved:</h2>
+        </div>
+      <% end %>
 
-  <div class="field">
-    <%= form.label :password %>
-    <%= form.text_field :password, id: :student_password %>
-  </div>
+      <div class="field">
+        <%= form.label :email %>
+        <%= form.text_field :email, id: :student_email %>
+      </div>
 
-  <div class="field">
-    <%= form.label :educational_level %>
-    <%= form.text_field :educational_level, id: :student_educational_level %>
-  </div>
+      <div class="field">
+        <%= form.label :name %>
+        <%= form.text_field :name, id: :student_name %>
+      </div>
 
-  <div class="field">
-    <%= form.label :university %>
-    <%= form.text_field :university, id: :student_university %>
-  </div>
+      <div class="field">
+        <%= form.label :password %>
+        <%= form.password_field :password, id: :student_password %>
+      </div>
+
+      <div class="field">
+        <%= form.label :educational_level %>
+        <%= form.text_field :educational_level, id: :student_educational_level %>
+      </div>
+
+      <div class="field">
+        <%= form.label :university %>
+        <%= form.text_field :university, id: :student_university %>
+      </div>
 
 
-  <div class="actions">
-    <%= form.submit  :class => 'btn btn-primary' %>
-  </div>
+      <div class="actions">
+        <%= form.submit  :class => 'btn btn-primary' %>
+      </div>
+    <% end %>
+  <% end %>
 <% end %>

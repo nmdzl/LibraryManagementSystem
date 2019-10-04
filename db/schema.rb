@@ -17,10 +17,8 @@ ActiveRecord::Schema.define(version: 20191002180131) do
     t.datetime "updated_at", null: false
     t.datetime "chk_out_dt"
     t.datetime "chk_in_date"
-    t.integer "student_id"
     t.integer "book_id"
     t.index ["book_id"], name: "index_book_histories_on_book_id"
-    t.index ["student_id"], name: "index_book_histories_on_student_id"
   end
 
   create_table "books", force: :cascade do |t|
@@ -97,7 +95,7 @@ ActiveRecord::Schema.define(version: 20191002180131) do
     t.string "password_digest"
     t.boolean "admin"
     t.boolean "requested_by"
-    t.boolean "librarian"
+    #t.boolean "librarian"
   end
 
 end

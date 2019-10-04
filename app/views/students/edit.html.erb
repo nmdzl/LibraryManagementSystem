@@ -1,6 +1,12 @@
-<h1>Editing Student</h1>
+<%if !@current_student.nil? %>
+  <% if @current_student.admin  %>
+    <h1>Editing Admin</h1>
+  <% end %>
+  <% if !@current_student.admin  %>
+    <h1>Editing Student</h1>
+  <% end %>
+    <%= render 'form', student: @student %>
 
-<%= render 'form', student: @student %>
-
-<%= link_to 'Show', @student %> |
-<%= link_to 'Back', students_path %>
+    <%= link_to 'Show', @student %> |
+    <%= link_to 'Back', home_path %>
+<% end %>

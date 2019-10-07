@@ -4,9 +4,9 @@
       <h2><%= pluralize(librarian.errors.count, "error") %> prohibited this librarian from being saved:</h2>
 
       <ul>
-      <% librarian.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
+        <% librarian.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
       </ul>
     </div>
   <% end %>
@@ -34,7 +34,7 @@
 
   <!--div class="field">
     <%= form.label :librarian %>
-    <%= form.check_box :librarian, id: :librarian_librarian %>
+  <%= form.check_box :librarian, id: :librarian_librarian %>
   </div-->
 
   <div class="actions">

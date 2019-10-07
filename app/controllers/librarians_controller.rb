@@ -69,6 +69,6 @@ class LibrariansController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def librarian_params
-      params.require(:librarian).permit(:name, :email, :password, :library, ) #:librarian
+      params.require(:librarian).permit(:name, :email, :password, :password_confirmation, :library ) #:librarian
     end
 end

@@ -20,23 +20,28 @@
 
 <%= form_for @student, :url => {:action =>'new_student'}, :html => {:method => "post"} do |f| %>
   <div class="field">
-    <%= f.label :name %><br>
+    <%= f.label :name %>
     <%= f.text_field :name,  :input_html => {:id=>'name'} %>
   </div>
   <div class="field">
-    <%= f.label :password %><br>
+    <%= f.label :password %>
     <%= f.password_field :password, :input_html => {:id=>'password'} %>
   </div>
   <div class=" input-group">
-    <%= f.label :email %><br>
+    <%= f.label :email %>
     <%= f.text_field :email, :input_html => {:id=>'email'} %>
   </div>
+  <br>
   <div class="field">
-    <%= f.label :educational_level %><br>
-    <%= f.text_field :educational_level %>
+    <%= f.label :educational_level %>
+    <select>
+      <option value="undergraduate">Undergraduate</option>
+      <option value="master">Master</option>
+      <option value="phd">PhD</option>
+    </select>
   </div>
   <div class="field">
-    <%= f.label :university, "University" %><br>
+    <%= f.label :university, "University" %>
     <%= f.text_field :university %>
   </div>
   <div class="actions">

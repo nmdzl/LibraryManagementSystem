@@ -28,7 +28,7 @@
 
   <div class="field">
     <%= form.label :library %>
-    <%= form.text_field :library, id: :librarian_library %>
+    <%= select("librarian", "library", Library.all.collect{ |l| [l.name, l.id] }) %>
   </div>
 
 

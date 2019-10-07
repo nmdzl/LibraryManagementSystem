@@ -7,10 +7,15 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
-Student.create(name: "Student1",
-               email: "student1@gmail.com",
-               password: "111111",
-               password_confirmation: "111111")
+Library.create(name: "James B. Hunt Jr. Library",
+               location: "1070 Partners Way, Raleigh, NC 27606",
+               max_day: 90,
+               overdue_fine: 9.99)
+
+Library.create(name: "D. H. Hill Jr. Library",
+               location: "2 W Broughton Dr, Raleigh, NC 27695",
+               max_day: 90,
+               overdue_fine: 9.99)
 
 Book.create(title: "Harry Potter",
             authors: "J.K. Rowling",
@@ -41,10 +46,12 @@ Book.create(title: "Engineering software as a service",
   name = Faker::Name.name
   email = "example-#{n+1}@ncsu.edu"
   password = "password"
+  educational_level = ["undergraduate", "master", "phd"][n%3]
   Student.create(name: name,
                  email: email,
                  password: password,
-                 password_confirmation:password)
+                 password_confirmation: password,
+                 educational_level: educational_level)
 end
 
 

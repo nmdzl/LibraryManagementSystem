@@ -34,7 +34,7 @@
 
   <div class="field">
     <%= f.label :library, "Library" %><br>
-    <%= f.text_field :library %> <!--better change into a dropdown list-->
+    <%= select("librarian", "library", Library.all.collect{ |l| [l.name, l.id] }) %>
   </div>
   <div class="actions">
     <%= f.submit 'Submit', :class => 'btn btn-primary'%>

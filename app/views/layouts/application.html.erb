@@ -16,7 +16,12 @@
             <%= link_to "Home", home_path, class: "btn btn-primary", style: 'color: #000'%>
           </div>
           <div style="margin: 15px 0px 0px 20px; float: left">
-            <li style="color: #000000; font-size: 14px"> Welcome, student <%=@current_student.name %>! </li>
+            <% if @current_student.admin  %>
+              <li style="color: #000000; font-size: 14px"> Welcome, Admin <%=@current_student.name %>! </li>
+            <% end %>
+            <% if !@current_student.admin  %>
+              <li style="color: #000000; font-size: 14px"> Welcome, student <%=@current_student.name %>! </li>
+            <% end %>
           </div>
 
         </ul>

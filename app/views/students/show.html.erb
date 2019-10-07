@@ -10,22 +10,20 @@
   <%= @student.name %>
 </p>
 
-<% if !@current_student.admin  %>
-  <p>
-    <strong>Educational level:</strong>
-    <%= @student.educational_level %>
-  </p>
+<p>
+  <strong>Educational level:</strong>
+  <%= @student.educational_level %>
+</p>
 
-  <p>
-    <strong>University:</strong>
-    <%= @student.university %>
-  </p>
+<p>
+  <strong>University:</strong>
+  <%= @student.university %>
+</p>
 
-  <p>
-    <strong>Max book:</strong>
-    <%= @student.max_book %>
-  </p>
-<% end %>
+<p>
+  <strong>Max book:</strong>
+  <%= @student.max_book %>
+</p>
 
 
 <%= link_to 'Edit', edit_student_path(@student) %> |

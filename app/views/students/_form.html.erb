@@ -23,7 +23,7 @@
       </div>
 
       <div class="actions">
-        <%= form.submit "Update Admin", :class => 'btn btn-primary' %>
+        <%= form.submit "Update", :class => 'btn btn-primary' %>
       </div>
     <% end %>
   <% end %>
@@ -54,7 +54,11 @@
 
       <div class="field">
         <%= form.label :educational_level %>
-        <%= form.text_field :educational_level, id: :student_educational_level %>
+        <select>
+          <option value="undergraduate">Undergraduate</option>
+          <option value="master">Master</option>
+          <option value="phd">PhD</option>
+        </select>
       </div>
 
       <div class="field">

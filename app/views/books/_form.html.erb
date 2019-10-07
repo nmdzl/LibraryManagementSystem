@@ -57,6 +57,11 @@
   </div>
 
   <div class="field">
+    <%= form.label :image %><br>
+    <%= form.file_field :image %>
+  </div>
+
+  <div class="field">
     <%= form.label :special_collection %>
     <%= form.check_box :special_collection, id: :book_special_collection %>
   </div>

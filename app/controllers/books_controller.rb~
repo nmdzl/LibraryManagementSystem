@@ -45,9 +45,9 @@ class BooksController < ApplicationController
         invalid_return = true
       else
         @book_history = BookHistory.find_by(:book_id => params[:id], :student_id => @current_student.id, :chk_in_date => nil)
-        @library = Library.find(@book.library_id)
-        if (Date.parse(@book_history.chk_out_dt.to_s)..Date.parse(Time.now.getlocal.to_s)).count > @library.max_day
-          @current_student.overdue_fine += @library.overdue_fine
+        start = @book_history.chk_out_dt
+        if (Date.parse(@book_history.chk_out_dt.to_s)..Date.parse(Time.now.getlocal.to_s)).count > @book.library_id.max_day
+          @current_student.overdue_fine += @book.library_id.overdue_fine
         end
       end 
     end

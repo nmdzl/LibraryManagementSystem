@@ -24,7 +24,7 @@
 
       <div class="field">
         <%= form.label :overdue_fine %>
-        <%= form.number_field :overdue_fine, step: 0.01, id: :student_overdue_fine %>
+        <%= form.number_field :overdue_fine, id: :student_overdue_fine %>
       </div>
 
       <div class="actions">

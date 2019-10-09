@@ -31,13 +31,13 @@ class BooksController < ApplicationController
         @special_collection_request.book_id = @book.id
         @special_collection_request.student_id = session[:student_id]
         if @special_collection_request.save!
-          flash.now[:notice] = "Successfully requested, please wait for approval of admin."
+          flash.now[:notice] = "Successfully requested, please wait for approval of admin/librarian."
           render 'index'
         else
           render json: @special_collection_request.errors, status: :unprocessable_entity
         end
       else
-        flash.now[:notice] = "You have already requested, please wait patiently for approval of admin."
+        flash.now[:notice] = "You have already requested, please wait patiently for approval of admin/librarian."
         render 'index'
       end
     end

@@ -1,0 +1,2 @@
+class LibrarianSignupRequest < ApplicationRecord
+end

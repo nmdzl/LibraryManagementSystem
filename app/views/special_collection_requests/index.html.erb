@@ -17,10 +17,12 @@
       <tr>
         <% @student = Student.find(special_collection_request.student_id) %>
         <% @book = Book.find(special_collection_request.book_id) %>
+        <% if !@current_student.nil? or (@current_librarian.library == @book.library) %>
         <td><%= @student.name %></td>
         <td><%= @book.title %></td>
         <td><%= link_to 'Approve', approve_special_collection_request_path(:id => special_collection_request.id), :class => "btn btn-warning", :style => "color: #000000"%></td>
-        <td><%= link_to 'Approve', decline_special_collection_request_path(:id => special_collection_request.id), :class => "btn btn-warning", :style => "color: #000000"%></td>
+        <td><%= link_to 'Decline', decline_special_collection_request_path(:id => special_collection_request.id), :class => "btn btn-warning", :style => "color: #000000"%></td>
+        <% end %>
       </tr>
     <% end %>
     <%end%>

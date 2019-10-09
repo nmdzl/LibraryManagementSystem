@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Librarian Signup Requests</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Librarian</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% if !@librarian_signup_requests.nil? %>
+    <% @librarian_signup_requests.each do |librarian_signup_request| %>
+      <tr>
+        <% @librarian = Librarian.find(librarian_signup_request.librarian_id) %>
+        <td><%= @librarian.name %></td>
+        <td><%= @librarian.email %></td>
+        <td><%= @librarian.library %></td>
+        <td><%= link_to 'Approve', approve_librarian_signup_request_path(:id => librarian_signup_request.id), :class => "btn btn-warning", :style => "color: #000000"%></td>
+        <td><%= link_to 'Decline', decline_librarian_signup_request_path(:id => librarian_signup_request.id), :class => "btn btn-warning", :style => "color: #000000"%></td>
+      </tr>
+    <% end %>
+    <%end%>
+  </tbody>
+</table>

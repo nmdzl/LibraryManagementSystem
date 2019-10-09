@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :librarian_signup_requests
   resources :special_collection_requests
   resources :librarians
   resources :books
@@ -27,6 +28,9 @@ Rails.application.routes.draw do
 
   get 'special_collection_requests/:id/approve' => 'special_collection_requests#approve', :as => :approve_special_collection_request
   get 'special_collection_requests/:id/decline' => 'special_collection_requests#decline', :as => :decline_special_collection_request
+
+  get 'librarian_signup_requests/:id/approve' => 'librarian_signup_requests#approve', :as => :approve_librarian_signup_request
+  get 'librarian_signup_requests/:id/decline' => 'librarian_signup_requests#decline', :as => :decline_librarian_signup_request
 
   resources :students
   resources :libraries

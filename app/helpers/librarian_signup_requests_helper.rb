@@ -1,0 +1,2 @@
+module LibrarianSignupRequestsHelper
+end

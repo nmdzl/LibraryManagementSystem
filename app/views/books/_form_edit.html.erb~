@@ -43,7 +43,7 @@
 
   <div class="field">
     <%= form.label :associated_library %>
-    <%= select("librarian", "library_id", Library.all.collect{ |l| [l.name, l.id] }) %>
+    <%= select("librarian", "library_id", Library.all.collect{ |l| l.id }) %>
   </div>
 
   <div class="field">

@@ -31,7 +31,7 @@
     <%= @student.overdue_fine %>
   <% else %>
     <% @student.overdue_fine = 0 %>
-    <%= @student.overdue_fine %>
+    <%= 0.0 %>
   <% end %>
 </p>
 

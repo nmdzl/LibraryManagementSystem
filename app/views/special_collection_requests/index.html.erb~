@@ -1,0 +1,26 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Special Collection Requests</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Student</th>
+      <th>Book</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @special_collection_requests.each do |special_collection_request| %>
+      <tr>
+        <% @student = Student.find(special_collection_request.student_id) %>
+        <% @book = Book.find(special_collection_request.book_id) %>
+        <td><%= @student.name %></td>
+        <td><%= @book.title %></td>
+        <td><%= link_to 'Approve', special_collection_request, method: :approve, data: { confirm: 'Are you sure to appove?' } %></td>
+        <td><%= link_to 'Decline', special_collection_request, method: :decline, data: { confirm: 'Are you sure to decline?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

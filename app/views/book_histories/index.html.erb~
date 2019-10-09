@@ -61,12 +61,7 @@
   </table>
   <br>
   <strong>Overdue fine: $</strong>
-  <% if !@current_student.overdue_fine.nil? %>
-    <%= @current_student.overdue_fine %>
-  <% else %>
-    <% @current_student.overdue_fine = 0 %>
-    <%= @current_student.overdue_fine %>
-  <% end %>
+  <%= @current_student.overdue_fine %>
   <br><br>
 <%else%>
   <blockquote>

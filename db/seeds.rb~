@@ -53,7 +53,7 @@ Book.create(title: "Engineering software as a service",
                  email: email,
                  password: password,
                  password_confirmation: password,
-                 educational_level: educational_level,
+                 educational_level: educational_level
                  overdue_fine: 0)
 end
 

@@ -33,7 +33,7 @@
 </table>
 
 <p>
-  <strong>Your current overdue fine: $</strong>
+  <strong>Overdue fine: $</strong>
   <% if !@current_student.overdue_fine.nil? %>
     <%= @current_student.overdue_fine %>
   <% else %>

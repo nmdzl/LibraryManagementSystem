@@ -1,0 +1,4 @@
+<h1>Warning:</h1>
+<b>You are not allowed to checkout, because this is a special collection.</b>
+<br><br>
+<%= render 'index' %>

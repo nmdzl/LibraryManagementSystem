@@ -12,8 +12,7 @@
 
 <p>
   <strong>Library:</strong>
-  <% @library = Library.find(@librarian.library) %>
-  <%= @library.name %>
+  <%= @librarian.library %>
 </p>
 
 <%= link_to 'Edit', edit_librarian_path(@librarian) %> |

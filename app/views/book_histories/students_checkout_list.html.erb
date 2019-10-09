@@ -1,0 +1,30 @@
+<table class="table">
+
+  <tr>
+    <th><strong>Name</strong></th>
+    <th><strong>Email</strong></th>
+    <th><strong>Book</strong></th>
+    <th><strong>Checkout date</strong></th>
+
+  </tr>
+
+
+<% if !@student_checkout_lists.nil? %>
+<% @student_checkout_lists.each do |l| %>
+  <% if l.chk_in_date.nil? %>
+  <% @student = Student.find(l.student_id) %>
+  <% @book = Book.find(l.book_id) %>
+  <% if @book.library == @current_librarian.library %>
+  <tr>
+    <td><%= @student.name %></td>
+    <td><%= @student.email %></td>
+    <td><%= @book.title %></td>
+    <td><%= l.chk_out_dt %></td>
+    </br>
+    <% end %>
+    <% end %>
+  </tr>
+<% end %>
+<% end %>
+</table>
+<%= link_to 'Back', home_path, :class => "btn btn-warning", :style => "color: #000000" %>

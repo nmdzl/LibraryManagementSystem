@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191002180131) do
+ActiveRecord::Schema.define(version: 20191008012224) do
 
   create_table "book_histories", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -41,6 +41,8 @@ ActiveRecord::Schema.define(version: 20191002180131) do
     t.boolean "is_requested"
     t.integer "student_id"
     t.integer "requested_by"
+    t.integer "library_id"
+    t.index ["library_id"], name: "index_books_on_library_id"
   end
 
   create_table "homes", force: :cascade do |t|
@@ -58,6 +60,8 @@ ActiveRecord::Schema.define(version: 20191002180131) do
     t.datetime "updated_at", null: false
     t.string "password_digest"
     t.boolean "admin"
+    t.integer "library_id"
+    t.index ["library_id"], name: "index_librarians_on_library_id"
   end
 
   create_table "libraries", force: :cascade do |t|
@@ -68,6 +72,9 @@ ActiveRecord::Schema.define(version: 20191002180131) do
     t.integer "overdue_fine"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "librarian"
+    t.integer "librarian_id"
+    t.index ["librarian_id"], name: "index_libraries_on_librarian_id"
   end
 
   create_table "searches", force: :cascade do |t|

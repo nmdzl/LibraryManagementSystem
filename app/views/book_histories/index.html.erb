@@ -28,6 +28,7 @@
     <% @book_histories.each do |book_history| %>
       <% @book = Book.find(book_history.book_id) %>
       <% @student = Student.find(book_history.student_id) %>
+      <!--
       <% #History of a student %>
       <%  if @data.split("&")[0].split("=")[1].nil? %>
         <% if book_history.student_id.to_s == @data.split("&")[1].split("=")[1]%>
@@ -42,7 +43,8 @@
         <%end%>
       <% end %> <%#End of history of a book%>
       <% #History of a book %>
-      <%  if @data.split("&")[1].split("=")[1].nil? %>
+      -->
+       <%  if @data.split("&")[1].split("=")[1].nil? %>
         <% if book_history.book_id.to_s == @data.split("&")[0].split("=")[1]%>
           <tr>
             <td><%= @book.title %></td>
@@ -56,6 +58,7 @@
         <%end%>
       <% end %>
       <%#End of history of a book%>
+
     <% end %>
     </tbody>
   </table>

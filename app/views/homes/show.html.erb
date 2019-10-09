@@ -43,8 +43,13 @@
 </div>
 <%end %>
 
-<%if !@current_librarian.nil? %>
+<!--%if !@current_librarian.nil? %
   <div class="btn-group float_btn" role="group">
     <%= link_to "Change Library", books_path, class: "btn btn-xlg btn-primary", style: "color: #000"%>
   </div>
-<%end %>
+%end %-->
+
+<%if !@current_librarian.nil? %>
+  <%= link_to 'Your Library', libraries_url, :class => "btn btn-success", :style => "color: #000000" %></br>
+  <%= link_to 'Students List', students_checkout_list_path, :class => "btn btn-success", :style => "color: #000000"%>
+<% end %>

@@ -12,13 +12,8 @@
 
 <p>
   <strong>Library:</strong>
-  <%= @librarian.library %>
-</p>
-
-<p>
-  <strong>Librarian:</strong>
-  <%= @librarian.librarian %>
+  <%= @librarian.library.name %>
 </p>
 
 <%= link_to 'Edit', edit_librarian_path(@librarian) %> |
-<%= link_to 'Back', librarians_path %>
+<%= link_to 'Back', home_path %>

@@ -24,6 +24,8 @@ Rails.application.routes.draw do
   get 'books/:id/cancel_request' => 'books#cancel_request', :as => :cancel_request_book
   resources :students
   resources :libraries
+  get 'books_in_your_library' => 'books#books_in_your_library'
+  get 'students_checkout_list' => 'book_histories#students_checkout_list'
 
 
   match ':controller(/:action(/:id))', :via=> :get

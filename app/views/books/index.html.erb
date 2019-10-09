@@ -13,7 +13,6 @@
       <th>edition</th>
       <th>Associated library</th>
       <th>Subject</th>
-      <th>Summary</th>
       <th>Special collection</th>
       <th>Status</th>
 
@@ -22,6 +21,7 @@
   </thead>
 
   <tbody>
+
     <% @books.each do |book| %>
       <tr>
         <td><%= book.isbn %></td>
@@ -30,15 +30,17 @@
         <td><%= book.language %></td>
         <td><%= book.published %></td>
         <td><%= book.edition %></td>
-        <td><%= book.associated_library %></td>
+        <td><%= book.library.name %></td>
         <td><%= book.subject %></td>
-        <td><%= book.summary %></td>
         <td><%= book.special_collection %></td>
         <% if book.is_borrowed %>
           <td><span class="label label-danger">Checked out</span></td>
         <% else %>
           <td><span class="label label-success">Available</span></td>
         <%end%>
+
+
+
 
         <td><%= link_to 'Show', book, :class => "btn btn-primary", :style => "color: #000000" %></td>
         <%if !@current_student.nil? %>
@@ -51,6 +53,8 @@
           <%end%>
         <%end%>
           <%end %>
+        <td><%=link_to 'Check out', borrow_book_path(:id => book.id), :class => "btn btn-success", :style => "color: #000000"%></td>
+
         <%if book.is_borrowed %>
           <%if !@current_student.nil? %>
           <% if book.student_id == @current_student.id %>
@@ -65,19 +69,22 @@
               <%end%>
             <%end%>
           <%end%>
-            <%end %>
+
         <%else%>
-          <td><%=link_to 'Check out', borrow_book_path(:id => book.id), :class => "btn btn-success", :style => "color: #000000"%></td>
+          <%end %>
         <%end%>
   <%end%>
+
   </tr>
   </tbody>
+
 </table>
 <%= will_paginate @books%>
 <br>
 <br><br><br><br>
+
 <%if !@current_student.nil? %>
 <%if @current_student.admin %>
   <%= link_to 'Add Book', new_book_path, :class => "btn btn-success", :style => "color: #000000" %>
 <% end %>
-<%end %>
+<% end %>

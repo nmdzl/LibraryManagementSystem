@@ -85,7 +85,7 @@ class SessionsController < ApplicationController
   end
 
   def librarian_params
-    params.require(:librarian).permit(:name, :email, :password, :library) #:librarian
+    params.require(:librarian).permit(:name, :email, :password, :library_id) #:librarian
   end
 
 end

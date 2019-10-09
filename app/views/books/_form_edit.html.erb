@@ -42,9 +42,10 @@
   </div>
 
   <div class="field">
-    <%= form.label :associated_library %>
-    <%= form.text_field :associated_library, id: :book_associated_library %>
+    <%= form.label :associated_library, :library_id %>
+    <%= form.select(:library_id, Library.all.collect{ |l| [l.name, l.id] }) %>
   </div>
+
 
   <div class="field">
     <%= form.label :subject %>
@@ -62,6 +63,6 @@
   </div>
 
   <div class="actions">
-    <%= f.submit :class => "btn btn-success", :style => "color: #000000" %>
+    <%= form.submit :class => "btn btn-success", :style => "color: #000000" %>
   </div>
 <% end %>

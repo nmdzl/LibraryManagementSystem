@@ -5,7 +5,7 @@ class SpecialCollectionRequestsController < ApplicationController
     @book = Book.find(@special_collection_request.book_id)
     @student = Student.find(@special_collection_request.student_id)
     if !@book.nil? and !@student.nil?
-      if @book.is_borrowed == True
+      if @book.is_borrowed == true
         flash.now[:danger] = "Uable to approve, because the book is currently checked out."
         render 'index'
       else
@@ -18,7 +18,7 @@ class SpecialCollectionRequestsController < ApplicationController
           @book_history.chk_out_dt = Time.now.getlocal
           @book_history.save!
           @special_collection_request.destroy
-          flash.now[:notice] = @student.name+"'s request for "+@book.name+" has been approved."
+          flash.now[:notice] = 'This request has successfully been approved.'
           render 'index', status: :ok
         else
           render json: @book.errors, status: :unprocessable_entity
@@ -32,9 +32,9 @@ class SpecialCollectionRequestsController < ApplicationController
   end
 
   def decline
-    @special_collection_request = Special_collection_request.find(params[:id])
+    @special_collection_request = SpecialCollectionRequest.find(params[:id])
     @special_collection_request.destroy
-    flash.now[:notice] = @student.name+"'s request for "+@book.name+" has been declined."
+    flash.now[:notice] = 'This request has been successfully declined.'
     render 'index'
   end
 

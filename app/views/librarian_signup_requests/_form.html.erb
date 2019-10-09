@@ -1,0 +1,22 @@
+<%= form_with(model: librarian_signup_request, local: true) do |form| %>
+  <% if librarian_signup_request.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(librarian_signup_request.errors.count, "error") %> prohibited this librarian_signup_request from being saved:</h2>
+
+      <ul>
+      <% librarian_signup_request.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :librarian_id %>
+    <%= form.number_field :librarian_id, id: :librarian_signup_request_librarian_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

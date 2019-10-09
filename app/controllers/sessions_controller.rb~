@@ -58,16 +58,13 @@ class SessionsController < ApplicationController
 
   def new_librarian
     @librarian = Librarian.new(librarian_params)
-    @librarian.is_approved = false
     begin
       if @librarian.save!
         session[:librarian_id] = @librarian.id
         logged_in_librarian?
         @librarian_signup_request = LibrarianSignupRequest.new
-        @librarian_signup_request.librarian_id = @librarian.id
-        @librarian_signup_request.save!
-        flash.now[:notice] = 'Your request to sign up as a librarian has been successfully sent to admin.'
         redirect_to loginpage_path
+        flash.now[:notice] = 'Your request to sign up as a librarian has been successfully sent to admin.'
       end
     rescue => error
       logger.debug "ERROR - gaurav"

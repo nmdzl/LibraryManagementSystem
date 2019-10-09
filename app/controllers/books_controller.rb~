@@ -12,6 +12,7 @@ class BooksController < ApplicationController
     logger.debug "Book id passed is #{params[:id]}"
     logger.debug "Book returned by search #{@book.id}"
     if !@book.special_collection or @current_student.admin
+      if @
       @book.is_borrowed=true
       @book.student_id = session[:student_id]
 
@@ -74,13 +75,21 @@ class BooksController < ApplicationController
     end
     send_mail = false
     if @book.is_requested
-      student = Student.find(@book.requested_by)
+      @student = Student.find(@book.requested_by)
       send_mail = true
+      @book.is_borrowed = true
+      @book.student_id = @student.id
+      @book_history = BookHistory.new
+      @book_history.book_id = @book.id
+      @book_history.student_id = @student.id
+      @book_history.chk_out_dt = Time.now.getlocal
+      @book_history.save!
+      @book.is_requested = false
+      @book.requested_by = nil
+    else
+      @book.is_borrowed=false
+      @book.student_id = nil
     end
-    @book.is_borrowed=false
-    @book.student_id = nil
-    @book.requested_by = nil
-    @book.is_requested = false
     if !invalid_return && @book.save!
       # redirect_to @book, notice: 'Book was successfully borrowed.'
       render :show, status: :ok, location: @book

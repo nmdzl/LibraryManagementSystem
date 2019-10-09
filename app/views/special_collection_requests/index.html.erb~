@@ -18,8 +18,8 @@
         <% @book = Book.find(special_collection_request.book_id) %>
         <td><%= @student.name %></td>
         <td><%= @book.title %></td>
-        <td><%= link_to 'Approve', special_collection_request, method: :approve, data: { confirm: 'Are you sure to appove?' } %></td>
-        <td><%= link_to 'Decline', special_collection_request, method: :decline, data: { confirm: 'Are you sure to decline?' } %></td>
+        <td><%= link_to 'Approve', approve_special_collection_request_path(:id => special_collection_request.id), :class => "btn btn-warning", :style => "color: #000000"%></td>
+        <td><%= link_to 'Approve', decline_special_collection_request_path(:id => special_collection_request.id), :class => "btn btn-warning", :style => "color: #000000"%></td>
       </tr>
     <% end %>
   </tbody>

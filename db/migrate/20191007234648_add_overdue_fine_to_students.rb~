@@ -1,0 +1,7 @@
+class AddOverdueFineToStudents < ActiveRecord::Migration[5.1]
+  def change
+    add_column :students, :overdue_fine, :float
+
+    validates_inclusion_of :overdue_fine, :greater_than => 0
+  end
+end

@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :book_requests
   resources :special_collection_requests
   resources :librarians
   resources :books

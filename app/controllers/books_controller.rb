@@ -66,6 +66,7 @@ class BooksController < ApplicationController
         if (Date.parse(@book_history.chk_out_dt.to_s)..Date.parse(Time.now.getlocal.to_s)).count > @library.max_day
           if @current_student.overdue_fine.nil?
             @current_student.overdue_fine = @library.overdue_fine
+            @current_student.save!
           else
             @current_student.overdue_fine += @library.overdue_fine
           end

@@ -1,18 +1,22 @@
 class SpecialCollectionRequestsController < ApplicationController
-  before_action :set_special_collection_request, only: [:approve, :decline]
 
   def approve
+    @special_collection_request = SpecialCollectionRequest.find(params[:id])
     @book = Book.find(@special_collection_request.book_id)
     @student = Student.find(@special_collection_request.student_id)
     if !@book.nil? and !@student.nil?
-      if @book.is_borrowed
+      if @book.is_borrowed == True
         flash.now[:danger] = "Uable to approve, because the book is currently checked out."
         render 'index'
       else
         @book.is_borrowed = true
         @book.student_id = @special_collection_request.student_id
         if @book.save!
-          create_book_history @book.id, session
+          @book_history = BookHistory.new
+          @book_history.book_id = @book.id
+          @book_history.student_id = @special_collecion_request.student_id
+          @book_history.chk_out_dt = Time.now.getlocal
+          @book_history.save!
           @special_collection_request.destroy
           flash.now[:notice] = @student.name+"'s request for "+@book.name+" has been approved."
           render 'index', status: :ok
@@ -28,6 +32,7 @@ class SpecialCollectionRequestsController < ApplicationController
   end
 
   def decline
+    @special_collection_request = Special_collection_request.find(params[:id])
     @special_collection_request.destroy
     flash.now[:notice] = @student.name+"'s request for "+@book.name+" has been declined."
     render 'index'

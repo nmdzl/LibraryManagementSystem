@@ -13,6 +13,7 @@ class SpecialCollectionRequestsController < ApplicationController
       if @book.save!
         create_book_history @book.id, session
         @special_collection_request.destroy
+        flash.now[:notice] = @student.name+"'s request for "+@book.name+" has been approved."
         render 'index', status: :ok
       else
         render json: @book.errors, status: :unprocessable_entity
@@ -22,7 +23,7 @@ class SpecialCollectionRequestsController < ApplicationController
 
   def decline
     @special_collection_request.destroy
-    flash.now[:danger] = @student.name+"'s request for "+@book.name+" has been declined."
+    flash.now[:notice] = @student.name+"'s request for "+@book.name+" has been declined."
     render 'index'
   end
 

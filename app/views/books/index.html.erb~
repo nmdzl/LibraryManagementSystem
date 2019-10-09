@@ -22,6 +22,7 @@
   </thead>
 
   <tbody>
+    <% @books = Book.all.paginate(:per_page=>10, :page=>params[:page]) %>
     <% @books.each do |book| %>
       <tr>
         <td><%= book.isbn %></td>
@@ -51,23 +52,30 @@
           <%end%>
         <%end%>
           <%end %>
-        <%if book.is_borrowed %>
-          <%if !@current_student.nil? %>
-          <% if book.student_id == @current_student.id %>
 
-            <td><%= link_to 'Return', return_book_path(:id => book.id), :class => "btn btn-warning", :style => "color: #000000"%></td>
-          <%else%>
-            <% if !book.is_requested %>
-              <td><%= link_to 'Request Notification', request_book_path(:id => book.id), :class => "btn btn-warning", :style => "color: #000000"%></td>
+        <%if @current_student.nil?%>
+          <td><%= link_to 'View checkout information', status_book_path(:id => book.id), :class => "btn btn-warning", :style => "color: #000000"%></td>
+        <%else%>
+
+          <% if current_student.admin? %>
+            <td><%= link_to 'View checkout information', status_book_path(:id => book.id), :class => "btn btn-warning", :style => "color: #000000"%></td>
+          <% end %>
+
+          <%if book.is_borrowed %>
+            <% if book.student_id == @current_student.id %>
+              <td><%= link_to 'Return', return_book_path(:id => book.id), :class => "btn btn-warning", :style => "color: #000000"%></td>
             <%else%>
+              <% if !book.is_requested %>
+                <td><%= link_to 'Request Notification', request_book_path(:id => book.id), :class => "btn btn-warning", :style => "color: #000000"%></td>
+              <% end %>
               <% if book.is_requested && (book.requested_by == @current_student.id) %>
                 <td><%= link_to 'Cancel Notification', cancel_request_book_path(:id => book.id), :class => "btn btn-warning", :style => "color: #000000"%></td>
-              <%end%>
+              <% end %>
             <%end%>
-          <%end%>
-            <%end %>
-        <%else%>
-          <td><%=link_to 'Check out', borrow_book_path(:id => book.id), :class => "btn btn-success", :style => "color: #000000"%></td>
+          <%else%>
+            <td><%=link_to 'Check out', borrow_book_path(:id => book.id), :class => "btn btn-success", :style => "color: #000000"%></td>
+          <%end %>
+
         <%end%>
   <%end%>
   </tr>

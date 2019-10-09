@@ -31,13 +31,14 @@ class BooksController < ApplicationController
         @special_collection_request.book_id = @book.id
         @special_collection_request.student_id = session[:student_id]
         if @special_collection_request.save!
-          flash.now[:danger] = "Successfully requested, please wait for approval of admin."
+          flash.now[:notice] = "Successfully requested, please wait for approval of admin."
           render 'index'
         else
           render json: @special_collection_request.errors, status: :unprocessable_entity
         end
       else
-        redirect_to books_path, notice: "You have already requested, please wait patiently for approval of admin."
+        flash.now[:notice] = "You have already requested, please wait patiently for approval of admin."
+        render 'index'
       end
     end
   end
@@ -63,19 +64,31 @@ class BooksController < ApplicationController
         @book_history = BookHistory.find_by(:book_id => params[:id], :student_id => @current_student.id, :chk_in_date => nil)
         @library = Library.find(@book.library_id)
         if (Date.parse(@book_history.chk_out_dt.to_s)..Date.parse(Time.now.getlocal.to_s)).count > @library.max_day
-          @current_student.overdue_fine += @library.overdue_fine
+          if @current_student.overdue_fine.nil?
+            @current_student.overdue_fine = @library.overdue_fine
+          else
+            @current_student.overdue_fine += @library.overdue_fine
+          end
         end
       end
     end
     send_mail = false
     if @book.is_requested
-      student = Student.find(@book.requested_by)
+      @student = Student.find(@book.requested_by)
       send_mail = true
+      @book.is_borrowed = true
+      @book.student_id = @student.id
+      @book_history = BookHistory.new
+      @book_history.book_id = @book.id
+      @book_history.student_id = @student.id
+      @book_history.chk_out_dt = Time.now.getlocal
+      @book_history.save!
+      @book.is_requested = false
+      @book.requested_by = nil
+    else
+      @book.is_borrowed=false
+      @book.student_id = nil
     end
-    @book.is_borrowed=false
-    @book.student_id = nil
-    @book.requested_by = nil
-    @book.is_requested = false
     if !invalid_return && @book.save!
       # redirect_to @book, notice: 'Book was successfully borrowed.'
       render :show, status: :ok, location: @book
@@ -122,6 +135,11 @@ class BooksController < ApplicationController
       render :show
       render json: @book.errors, status: :unprocessable_entity
     end
+  end
+
+  def status
+    @book = Book.find(params[:id])
+    render 'status'
   end
 
 

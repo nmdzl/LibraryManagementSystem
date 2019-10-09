@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :book_requests
   resources :special_collection_requests
   resources :librarians
   resources :books
@@ -20,12 +21,13 @@ Rails.application.routes.draw do
 
   get 'books/:id/borrow' => 'books#borrow', :as => :borrow_book
   get 'book_histories/:data/index' => 'book_histories#index', :as =>:check_student_history
+  get 'books/:id/status' => '
   get 'books/:id/request' => 'books#request_book', :as => :request_book
   get 'books/:id/return' => 'books#return', :as => :return_book
   get 'books/:id/cancel_request' => 'books#cancel_request', :as => :cancel_request_book
 
-  post 'special_collection_requests/:id/approve' => 'special_collection_requests#approve', :as => :approve
-  post 'special_collection_requests/:id/decline' => 'special_collection_requests#decline', :as => :decline
+  get 'special_collection_requests/:id/approve' => 'special_collection_requests#approve', :as => :approve_special_collection_request
+  get 'special_collection_requests/:id/decline' => 'special_collection_requests#decline', :as => :decline_special_collection_request
 
   resources :students
   resources :libraries

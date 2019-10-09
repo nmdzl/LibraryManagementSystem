@@ -4,20 +4,26 @@ class SpecialCollectionRequestsController < ApplicationController
   def approve
     @book = Book.find(@special_collection_request.book_id)
     @student = Student.find(@special_collection_request.student_id)
-    if @book.is_borrowed
-      flash.now[:danger] = "Uable to approve, because the book is currently checked out."
-      render 'index'
-    else
-      @book.is_borrowed = true
-      @book.student_id = @special_collection_request.student_id
-      if @book.save!
-        create_book_history @book.id, session
-        @special_collection_request.destroy
-        flash.now[:notice] = @student.name+"'s request for "+@book.name+" has been approved."
-        render 'index', status: :ok
+    if !@book.nil? and !@student.nil?
+      if @book.is_borrowed
+        flash.now[:danger] = "Uable to approve, because the book is currently checked out."
+        render 'index'
       else
-        render json: @book.errors, status: :unprocessable_entity
+        @book.is_borrowed = true
+        @book.student_id = @special_collection_request.student_id
+        if @book.save!
+          create_book_history @book.id, session
+          @special_collection_request.destroy
+          flash.now[:notice] = @student.name+"'s request for "+@book.name+" has been approved."
+          render 'index', status: :ok
+        else
+          render json: @book.errors, status: :unprocessable_entity
+        end
       end
+    else
+      @specail_collection_request.destroy
+      flash.now[:danger] = "This request has been out of date, thus automatically removed."
+      rener 'index'
     end
   end
 

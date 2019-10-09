@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<strong>Book: </strong>
+<%= @book.title %>
+<br><br>
+<strong>Checkout status: </strong>
+<% if @book.is_borrowed %>
+  checkouted out by: 
+  <% @student = Student.find(@book.student_id) %>
+  <%= @student.name %>
+  <br>
+  <Strong>Request status: </strong>
+  <% if @book.is_requested %>
+    <% @student = Student.find(@book.requested_by) %>
+    requested by: 
+    <%= @student.name %>
+  <% else %>
+    no request yet
+  <%end%>
+<% else %>
+  available
+<%end%>
+
+<br>
+<%= link_to 'Back', books_path, :class => "btn btn-warning", :style => "color: #000000" %>

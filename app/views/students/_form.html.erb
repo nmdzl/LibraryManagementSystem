@@ -9,7 +9,7 @@
 
       <div class="field">
         <%= form.label :email %>
-        <%= form.text_field :email, id: :student_email %>
+        <p>team587@ncsu.edu</p>
       </div>
 
       <div class="field">
@@ -71,6 +71,10 @@
         <%= form.text_field :university, id: :student_university %>
       </div>
 
+      <div class="field">
+        <%= form.label :overdue_fine %>
+        <%= form.number_field :overdue_fine, step: 0.01, id: :student_overdue_fine %>
+      </div>
 
       <div class="actions">
         <%= form.submit  :class => 'btn btn-primary' %>

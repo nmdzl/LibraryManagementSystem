@@ -1,5 +1,10 @@
 <%if !@current_student.nil? %>
+  <% if !@current_student.admin  %>
   <h1>Editing Student</h1>
+  <% end %>
+    <%! if @current_student.admin  %>
+    <h1>Editing Admin</h1>
+  <% end %>
   <%= render 'form', student: @student %>
 
   <%= link_to 'Show', @student %> |

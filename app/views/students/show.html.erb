@@ -10,6 +10,8 @@
   <%= @student.name %>
 </p>
 
+<% if !@current_student.admin  %>
+
 <p>
   <strong>Educational level:</strong>
   <%= @student.educational_level %>
@@ -20,10 +22,12 @@
   <%= @student.university %>
 </p>
 
-<p>
+<!--p>
   <strong>Max book:</strong>
   <%= @student.max_book %>
-</p>
+</p-->
+
+<% end %>
 
 <p>
   <strong>Overdue fine: $</strong>

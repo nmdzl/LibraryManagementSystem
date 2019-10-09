@@ -24,8 +24,8 @@ Rails.application.routes.draw do
   get 'books/:id/return' => 'books#return', :as => :return_book
   get 'books/:id/cancel_request' => 'books#cancel_request', :as => :cancel_request_book
 
-  get 'special_collection_requests/:id/approve' => 'special_collection_requests#approve', :as => :approve
-  get 'special_collection_requests/:id/decline' => 'special_collection_requests#decline', :as => :decline
+  post 'special_collection_requests/:id/approve' => 'special_collection_requests#approve', :as => :approve
+  post 'special_collection_requests/:id/decline' => 'special_collection_requests#decline', :as => :decline
 
   resources :students
   resources :libraries

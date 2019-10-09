@@ -12,18 +12,35 @@ class BooksController < ApplicationController
     Rails.logger = Logger.new(STDOUT)
     logger.debug "Book id passed is #{params[:id]}"
     logger.debug "Book returned by search #{@book.id}"
-    @book.is_borrowed=true
-    @book.student_id = session[:student_id]
+    if !@book.special_collection or @current_student.admin
+      @book.is_borrowed=true
+      @book.student_id = session[:student_id]
 
-    if @book.save!
- #      redirect_to @book, notice: 'Book was successfully borrowed.'
-       render :show, status: :ok, location: @book
+      if @book.save!
+ #        redirect_to @book, notice: 'Book was successfully borrowed.'
+         render :show, status: :ok, location: @book
+      else
+ #       render :show
+        render json: @book.errors, status: :unprocessable_entity
+      end
+     # create check_out_history of book #vicky
+      create_book_history params[:id], session[:student_id],Time.now.getlocal
     else
- #     render :show
-      render json: @book.errors, status: :unprocessable_entity
+      @special_collection_request = SpecialCollectionRequest.find_by(:student_id => session[:student_id], :book_id => @book.id)
+      if @special_collection_request.nil?
+        @special_collection_request = SpecialCollectionRequest.new
+        @special_collection_request.book_id = @book.id
+        @special_collection_request.student_id = session[:student_id]
+        if @special_collection_request.save!
+          flash.now[:danger] = "Successfully requested, please wait for approval of admin."
+          render 'index'
+        else
+          render json: @special_collection_request.errors, status: :unprocessable_entity
+        end
+      else
+        redirect_to books_path, notice: "You have already requested, please wait patiently for approval of admin."
+      end
     end
-   # create check_out_history of book #vicky
-    create_book_history params[:id], session[:student_id],Time.now.getlocal
   end
 
   def create_book_history(book_id, student_id, chk_out_dt)
@@ -45,11 +62,11 @@ class BooksController < ApplicationController
         invalid_return = true
       else
         @book_history = BookHistory.find_by(:book_id => params[:id], :student_id => @current_student.id, :chk_in_date => nil)
-        start = @book_history.chk_out_dt
-        if (Date.parse(@book_history.chk_out_dt.to_s)..Date.parse(Time.now.getlocal.to_s)).count > @book.library_id.max_day
-          @current_student.overdue_fine += @book.library_id.overdue_fine
+        @library = Library.find(@book.library_id)
+        if (Date.parse(@book_history.chk_out_dt.to_s)..Date.parse(Time.now.getlocal.to_s)).count > @library.max_day
+          @current_student.overdue_fine += @library.overdue_fine
         end
-      end 
+      end
     end
     send_mail = false
     if @book.is_requested
@@ -148,6 +165,7 @@ class BooksController < ApplicationController
   # PATCH/PUT /books/1
   # PATCH/PUT /books/1.json
   def update
+    @book = Book.find(params[:id])
     respond_to do |format|
       if @book.update(book_params)
         format.html { redirect_to @book, notice: 'Book was successfully updated.' }

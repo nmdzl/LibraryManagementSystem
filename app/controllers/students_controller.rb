@@ -25,7 +25,7 @@ class StudentsController < ApplicationController
   # POST /students
   # POST /students.json
   def create
-    @student = Student.new(student_params, overdue_fine: 0)
+    @student = Student.new(student_params)
 
     respond_to do |format|
       if @student.save

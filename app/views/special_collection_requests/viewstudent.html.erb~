@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @student.email %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @student.name %>
+</p>
+
+<p>
+  <strong>Educational level:</strong>
+  <%= @student.educational_level %>
+</p>
+
+<p>
+  <strong>University:</strong>
+  <%= @student.university %>
+</p>
+
+<p>
+  <strong>Max book:</strong>
+  <%= @student.max_book %>
+</p>
+
+<p>
+  <strong>Overdue fine: $</strong>
+  <% if !@student.overdue_fine.nil? %>
+    <%= @student.overdue_fine %>
+  <% else %>
+    <% @student.overdue_fine = 0 %>
+    <%= @student.overdue_fine %>
+  <% end %>
+</p>
+
+
+<%= link_to 'Back', home_path %>

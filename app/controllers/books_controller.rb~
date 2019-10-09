@@ -12,7 +12,6 @@ class BooksController < ApplicationController
     logger.debug "Book id passed is #{params[:id]}"
     logger.debug "Book returned by search #{@book.id}"
     if !@book.special_collection or @current_student.admin
-      if @
       @book.is_borrowed=true
       @book.student_id = session[:student_id]
 

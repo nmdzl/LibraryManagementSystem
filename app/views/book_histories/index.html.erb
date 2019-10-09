@@ -65,6 +65,7 @@
     <%= @current_student.overdue_fine %>
   <% else %>
     <% @current_student.overdue_fine = 0 %>
+    <% @current_student.save! %>
     <%= @current_student.overdue_fine %>
   <% end %>
   <br><br>

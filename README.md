@@ -27,9 +27,7 @@
 - [x] sign up to new student (select the university)
 - [x] sign up to new librarian (including select the library which he belongs to)
 
-## after you login
-
-* when the identity is the admin:
+## after admin login
 
 1. View Profile(show the private info.):
 - [x] name 
@@ -71,7 +69,7 @@
 then the admin or librarian could see a request of that book with two buttons "approve" and "deny"
 
 
-* when the identity is the student: 
+## after student login
 1. View Profile(show the private info.):
 - [x] name
 - [x] email
@@ -90,7 +88,7 @@ then the admin or librarian could see a request of that book with two buttons "a
 - [x] Bookmark the book witch they are interested in
 
 
-* when the identity is the librarian:
+## after librarian login
 
 1. View Profile(show the private info.):
 - [x] name
@@ -98,15 +96,15 @@ then the admin or librarian could see a request of that book with two buttons "a
 - [x] library which he belongs to
 
 2. Choose library
-- [x] Switch to another library
+- [x] Switch to another library(view profile -> edit, there you can change your library)
 
 3. Manage book: (the difference with admin: the librarian could only manage the book which belongs to his library)
 - [x] Including isbn, title, authors, language, published time, edition, associated lirary, subject, status (show: show the specific book info. like summary...)
 - [x] View checkout history: View the checkout history of each book
-- [x] Edit: edit the info. of each book
+- [x] Edit: edit the info. of each book (Manage Library -> View Books In Your Library)
 - [x] View checkout status: check each book is available or not
 - [x] Bookmark the book witch they are interested in
-
+- [x] Add books to his library (Manage Library -> Add Book To Library)
 
 ## Bounes
 - [x] No student/librarian should access any private content associated with other student/librarian/admin's account.

@@ -8,6 +8,14 @@ class BookHistoriesController < ApplicationController
     @data=params[:data]#params[:id]
   end
 
+  def students_checkout_list
+    @student_checkout_lists = BookHistory.all
+    #@book_histories = BookHistory.all
+    #  @book = Book.find(book_history.book_id)
+    #  @students = Student.find_each(book_history.student_id)
+  end
+
+
   # GET /book_histories/1
   # GET /book_histories/1.json
   def show

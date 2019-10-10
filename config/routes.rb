@@ -35,6 +35,9 @@ Rails.application.routes.draw do
   resources :students
   resources :libraries
 
+  get 'books_in_your_library' => 'books#books_in_your_library'
+  get 'students_checkout_list' => 'book_histories#students_checkout_list'
+
 
   match ':controller(/:action(/:id))', :via=> :get
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

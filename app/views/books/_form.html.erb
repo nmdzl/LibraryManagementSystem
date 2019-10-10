@@ -11,6 +11,10 @@
     </div>
   <% end %>
 
+  <%if !@current_librarian.nil? %>
+    <p>Add book to <b><%= @current_librarian.library.name%></b></p>
+  <% end %>
+
   <div class="field">
     <%= form.label :isbn %>
     <%= form.text_field :isbn, id: :book_isbn %>
@@ -41,10 +45,14 @@
     <%= form.text_field :edition, id: :book_edition %>
   </div>
 
+  <%if !@current_student.nil? %>
+    <%if @current_student.admin %>
   <div class="field">
-    <%= form.label :associated_library %>
-    <%= form.text_field :associated_library, id: :book_associated_library %>
+    <%= form.label :associated_library, :library_id %>
+    <%= form.select(:library_id, Library.all.collect{ |l| [l.name, l.id] }) %>
   </div>
+    <% end %>
+    <% end %>
 
   <div class="field">
     <%= form.label :subject %>

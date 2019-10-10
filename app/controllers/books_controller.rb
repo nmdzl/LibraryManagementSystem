@@ -6,6 +6,11 @@ class BooksController < ApplicationController
   def index
   end
 
+  def books_in_your_library
+    @books = Book.where(:library_id => @current_librarian.library_id).paginate(:per_page=>10, :page=>params[:page])
+  end
+
+
   def borrow
     @book=Book.find(params[:id])
     Rails.logger = Logger.new(STDOUT)
@@ -153,6 +158,9 @@ class BooksController < ApplicationController
   # GET /books/new
   def new
     @book = Book.new
+    def books_in_your_library
+      @books = Book.where(:library_id => @current_librarian.library_id).paginate(:per_page=>10, :page=>params[:page])
+    end
   end
 
   # GET /books/1/edit
@@ -167,6 +175,11 @@ class BooksController < ApplicationController
     Rails.logger = Logger.new(STDOUT)
     logger.debug "params passed is #{book_params}"
     @book.is_deleted = false
+
+    if !@current_librarian.nil?
+      @book[:library_id] = @current_librarian.library_id
+      @book[:associated_library] = @current_librarian.library.name
+    end
 
     respond_to do |format|
       if @book.save
@@ -221,6 +234,6 @@ class BooksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def book_params
-      params.require(:book).permit(:isbn, :title, :authors, :language, :published, :edition, :associated_library, :subject, :summary, :special_collection, :is_borrowed, :is_deleted)
+      params.require(:book).permit(:isbn, :title, :authors, :language, :published, :edition, :associated_library, :subject, :summary, :special_collection, :library_id, :is_borrowed, :is_deleted)
     end
 end

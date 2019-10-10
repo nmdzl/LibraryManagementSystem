@@ -42,8 +42,8 @@
   </div>
 
   <div class="field">
-    <%= form.label :associated_library %>
-    <%= select("librarian", "library_id", Library.all.collect{ |l| [l.name, l.id] }) %>
+    <%= form.label :associated_library, :library_id %>
+    <%= form.select(:library_id, Library.all.collect{ |l| [l.name, l.id] }) %>
   </div>
 
   <div class="field">

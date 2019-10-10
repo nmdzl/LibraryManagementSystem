@@ -35,6 +35,9 @@
     <%= link_to "Manage Books", books_path, class: "btn btn-xlg btn-info", style: "color: #000"%>
   </div>
 
+  <%= link_to 'Checkout list', students_checkout_list_path, :class => "btn btn-success", :style => "color: #000000"%><br>
+  <%= link_to 'Overdue List', students_overdue_list_path, :class => "btn btn-success", :style => "color: #000000"%><br>
+
   <div class="btn-group float_btn" role="group">
     <%= link_to "All requests for special collection", special_collection_requests_path, class: "btn btn-xlg btn-info", style: "color: #000"%>
   </div>
@@ -61,6 +64,7 @@
     <%= link_to "All requests for special collection", special_collection_requests_path, class: "btn btn-xlg btn-info", style: "color: #000"%>
   </div>
 
-  <%= link_to 'Checkout list', students_checkout_list_path, :class => "btn btn-success", :style => "color: #000000"%>
+  <%= link_to 'Checkout list', students_checkout_list_path, :class => "btn btn-success", :style => "color: #000000"%><br>
+  <%= link_to 'Overdue List', students_overdue_list_path, :class => "btn btn-success", :style => "color: #000000"%>
 
 <%end %>

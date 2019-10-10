@@ -6,6 +6,7 @@ class LibrarianSignupRequestsController < ApplicationController
     begin
       @librarian_signup_request.destroy
       @librarian.is_approved = true
+      @librarian.save!
       flash.now[:notice] = 'You have successfully approved this signup request.'
       render 'index'
     rescue
@@ -17,6 +18,7 @@ class LibrarianSignupRequestsController < ApplicationController
   def decline
     @librarian_signup_request = LibrarianSignupRequest.find(params[:id])
     @librarian_signup_request.destroy
+    @librarian.destroy
     flash.now[:notice] = 'This request has been successfully declined.'
     render 'index'
   end

@@ -11,8 +11,7 @@
 * 1. The first requirement of Bounes finished (cannot see others' private contents )
 * 2. Admin could manage all books of all libraries, librarian could only manage books of his own library.
 * 3. If there is no any books in the database, you can run rails db:seed to run some code which it could create several fake books.(Not used for heroku)
-* 4.
-
+* 4. If you test about signup for the librarian, you have to switch to the admin account to approve.(For the student to borrow the special collection books, it has the familiar logic.)
 
 
 

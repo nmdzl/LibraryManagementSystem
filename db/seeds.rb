@@ -49,11 +49,13 @@ Book.create(title: "Engineering software as a service",
   email = "example-#{n+1}@ncsu.edu"
   password = "password"
   educational_level = ["undergraduate", "master", "phd"][n%3]
+  max_book = [2,4,6][n%3]
   Student.create(name: name,
                  email: email,
                  password: password,
                  password_confirmation: password,
                  educational_level: educational_level,
+                 max_book: max_book,
                  overdue_fine: 0)
 end
 

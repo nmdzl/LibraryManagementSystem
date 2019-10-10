@@ -19,8 +19,13 @@ class SessionsController < ApplicationController
   def create_librarian
     librarian = Librarian.find_by(email: params[:session][:email].downcase)
     if librarian && librarian.authenticate(params[:session][:password])
-     log_in_librarian librarian
-      redirect_to home_path
+      if librarian.is_approved
+        log_in_librarian librarian
+        redirect_to home_path
+      else
+        flash.now[:notice] = "Please wait patiently for approve."
+        render 'new'
+      end
     else
       flash.now[:danger] = "Invalid email id or password. Please try again."
       render 'new'

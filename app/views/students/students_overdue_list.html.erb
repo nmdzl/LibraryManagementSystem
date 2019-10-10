@@ -1,0 +1,25 @@
+<table class="table">
+
+  <tr>
+    <th><strong>Name</strong></th>
+    <th><strong>Email</strong></th>
+    <th><strong>Overdue fine</strong></th>
+
+  </tr>
+
+
+<% @students = Student.all %>
+<% @students.each do |s| %>
+  <% if !s.overdue_fine.nil? %>
+  <% if s.overdue_fine > 0 %>
+  <tr>
+    <td><%= s.name %></td>
+    <td><%= s.email %></td>
+    <td><%= s.overdue_fine %></td>
+    </br>
+    <% end %>
+    <% end %>
+  </tr>
+<% end %>
+</table>
+<%= link_to 'Back', home_path, :class => "btn btn-warning", :style => "color: #000000" %>

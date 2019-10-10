@@ -19,7 +19,7 @@ class SessionsController < ApplicationController
   def create_librarian
     librarian = Librarian.find_by(email: params[:session][:email].downcase)
     if librarian && librarian.authenticate(params[:session][:password])
-      log_in_librarian librarian
+     log_in_librarian librarian
       redirect_to home_path
     else
       flash.now[:danger] = "Invalid email id or password. Please try again."
@@ -62,14 +62,16 @@ class SessionsController < ApplicationController
     begin
       if @librarian.save!
         session[:librarian_id] = @librarian.id
-        logged_in_librarian?
+         if logged_in_librarian?
+           log_out_librarian
+         end
         @librarian_signup_request = LibrarianSignupRequest.new
         @librarian_signup_request.librarian_id = @librarian.id
         @librarian_signup_request.save!
         flash.now[:notice] = 'Your request to sign up as a librarian has been successfully sent to admin.'
-        redirect_to loginpage_path
+       render 'sessions/new'
       end
-    rescue => error
+    rescue
       logger.debug "ERROR - gaurav"
       flash.now[:danger] = "#{error.message}"
       render 'signup_librarian'
@@ -90,7 +92,7 @@ class SessionsController < ApplicationController
   end
 
   def librarian_params
-    params.require(:librarian).permit(:name, :email, :password, :library) #:librarian
+    params.require(:librarian).permit(:name, :email, :password, :library_id) #:librarian
   end
 
 end

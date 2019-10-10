@@ -21,7 +21,7 @@
     <td><%= @book.authors %></td>
     <td><%= @book.subject %></td>
     <td><%= @book.isbn %></td>
-    <td><%= @book.associated_library %></td>
+    <td><%= @book.library.name %></td>
     <td><%= @book.language %></td>
     <td><%= @book.published %></td>
     <td><%= @book.special_collection %></td>
@@ -42,7 +42,9 @@
   <% end %>
 </p>
 
+<%if !@current_student.nil? %>
 <%if @current_student.admin %>
   <%= link_to 'Edit', edit_book_path(@book), :class => "btn btn-danger", :style => "color: #000000" %> |
+<%end%>
 <%end%>
 <%= link_to 'Back', books_path, :class => "btn btn-warning", :style => "color: #000000" %>

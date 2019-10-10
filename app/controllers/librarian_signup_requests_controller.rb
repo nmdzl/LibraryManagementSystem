@@ -3,11 +3,13 @@ class LibrarianSignupRequestsController < ApplicationController
   def approve
     @librarian_signup_request = LibrarianSignupRequest.find(params[:id])
     @librarian = Librarian.find(@librarian_signup_request.librarian_id)
-    if @librarian.is_approved
-      flash.now[:notice] = 'This request has already been approved.'
-      render 'index'
-    else
+    begin
+      @librarian_signup_request.destroy
+      @librarian.is_approved = true
       flash.now[:notice] = 'You have successfully approved this signup request.'
+      render 'index'
+    rescue
+      flash.now[:notice] = 'This request has already been approved.'
       render 'index'
     end
   end

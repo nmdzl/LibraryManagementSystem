@@ -1,6 +1,6 @@
 class Librarian < ApplicationRecord
   has_many :books
-  #belongs_to :libraries
+  belongs_to :library
   before_save { self.email = email.downcase }
   validates :name,
             :presence => true

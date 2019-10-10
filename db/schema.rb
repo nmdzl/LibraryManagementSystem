@@ -66,7 +66,9 @@ ActiveRecord::Schema.define(version: 20191009224402) do
     t.datetime "updated_at", null: false
     t.string "password_digest"
     t.boolean "admin"
+    t.integer "library_id"
     t.boolean "is_approved"
+    t.index ["library_id"], name: "index_librarians_on_library_id"
   end
 
   create_table "libraries", force: :cascade do |t|
@@ -77,6 +79,9 @@ ActiveRecord::Schema.define(version: 20191009224402) do
     t.integer "overdue_fine"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "librarian"
+    t.integer "librarian_id"
+    t.index ["librarian_id"], name: "index_libraries_on_librarian_id"
   end
 
   create_table "searches", force: :cascade do |t|

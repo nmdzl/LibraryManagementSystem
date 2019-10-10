@@ -84,4 +84,5 @@ Student.create(name: "Student_Admin",
                email: "team587@ncsu.edu",
                password: "111111",
                password_confirmation: "111111",
+               max_book: 2,
                admin: true)

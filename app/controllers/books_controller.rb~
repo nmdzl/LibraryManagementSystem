@@ -6,6 +6,11 @@ class BooksController < ApplicationController
   def index
   end
 
+  def books_in_your_library
+    @books = Book.where(:library_id => @current_librarian.library_id).paginate(:per_page=>10, :page=>params[:page])
+  end
+
+
   def borrow
     @book=Book.find(params[:id])
     Rails.logger = Logger.new(STDOUT)
@@ -31,13 +36,13 @@ class BooksController < ApplicationController
         @special_collection_request.book_id = @book.id
         @special_collection_request.student_id = session[:student_id]
         if @special_collection_request.save!
-          flash.now[:notice] = "Successfully requested, please wait for approval of admin."
+          flash.now[:notice] = "Successfully requested, please wait for approval of admin/librarian."
           render 'index'
         else
           render json: @special_collection_request.errors, status: :unprocessable_entity
         end
       else
-        flash.now[:notice] = "You have already requested, please wait patiently for approval of admin."
+        flash.now[:notice] = "You have already requested, please wait patiently for approval of admin/librarian."
         render 'index'
       end
     end
@@ -66,6 +71,7 @@ class BooksController < ApplicationController
         if (Date.parse(@book_history.chk_out_dt.to_s)..Date.parse(Time.now.getlocal.to_s)).count > @library.max_day
           if @current_student.overdue_fine.nil?
             @current_student.overdue_fine = @library.overdue_fine
+            @current_student.save!
           else
             @current_student.overdue_fine += @library.overdue_fine
           end
@@ -152,6 +158,9 @@ class BooksController < ApplicationController
   # GET /books/new
   def new
     @book = Book.new
+    def books_in_your_library
+      @books = Book.where(:library_id => @current_librarian.library_id).paginate(:per_page=>10, :page=>params[:page])
+    end
   end
 
   # GET /books/1/edit
@@ -166,6 +175,11 @@ class BooksController < ApplicationController
     Rails.logger = Logger.new(STDOUT)
     logger.debug "params passed is #{book_params}"
     @book.is_deleted = false
+
+    if !@current_librarian.nil?
+      @book[:library_id] = @current_librarian.library_id
+      @book[:associated_library] = @current_librarian.library.name
+    end
 
     respond_to do |format|
       if @book.save
@@ -220,6 +234,6 @@ class BooksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def book_params
-      params.require(:book).permit(:isbn, :title, :authors, :language, :published, :edition, :associated_library, :subject, :summary, :special_collection, :is_borrowed, :is_deleted)
+      params.require(:book).permit(:isbn, :title, :authors, :language, :published, :edition, :associated_library, :subject, :summary, :special_collection, :library_id, :is_borrowed, :is_deleted)
     end
 end

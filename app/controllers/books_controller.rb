@@ -17,18 +17,30 @@ class BooksController < ApplicationController
     logger.debug "Book id passed is #{params[:id]}"
     logger.debug "Book returned by search #{@book.id}"
     if !@book.special_collection or @current_student.admin
-      @book.is_borrowed=true
-      @book.student_id = session[:student_id]
-
-      if @book.save!
- #        redirect_to @book, notice: 'Book was successfully borrowed.'
-         render :show, status: :ok, location: @book
-      else
- #       render :show
-        render json: @book.errors, status: :unprocessable_entity
+      number=0
+      @books = Book.all
+      @books.each do |book|
+        if book.student_id == @current_student.id
+          number += 1
+        end
       end
-     # create check_out_history of book #vicky
-      create_book_history params[:id], session[:student_id],Time.now.getlocal
+      if number < @current_student.max_book
+        @book.is_borrowed=true
+        @book.student_id = session[:student_id]
+
+        if @book.save!
+ #          redirect_to @book, notice: 'Book was successfully borrowed.'
+           render :show, status: :ok, location: @book
+        else
+ #         render :show
+          render json: @book.errors, status: :unprocessable_entity
+        end
+       # create check_out_history of book #vicky
+        create_book_history params[:id], session[:student_id],Time.now.getlocal
+      else
+        flash.now[:notice] = "Your have reached your maximum borrow number."
+        render 'index'
+      end
     else
       @special_collection_request = SpecialCollectionRequest.find_by(:student_id => session[:student_id], :book_id => @book.id)
       if @special_collection_request.nil?

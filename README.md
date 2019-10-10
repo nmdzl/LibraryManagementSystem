@@ -1,6 +1,6 @@
 # README
 
-# Heroku link: https://sheltered-shelf-73464.herokuapp.com/
+# Heroku link: https://fierce-badlands-55306.herokuapp.com/
 
 # Admin account:
   * email: team587@ncsu.edu

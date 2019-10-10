@@ -37,6 +37,7 @@ Rails.application.routes.draw do
 
   get 'books_in_your_library' => 'books#books_in_your_library'
   get 'students_checkout_list' => 'book_histories#students_checkout_list'
+  get 'students_overdue_list' => 'students#students_overdue_list'
 
 
   match ':controller(/:action(/:id))', :via=> :get

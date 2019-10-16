@@ -1,4 +1,5 @@
 # README
+if you have any questions, please feel free to contact my email: bzhang37@ncsu.edu
 
 # Heroku link: https://fierce-badlands-55306.herokuapp.com/
 

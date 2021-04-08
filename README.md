@@ -24,7 +24,8 @@ The project is online in [Heroku](https://fierce-badlands-55306.herokuapp.com/).
 
 - Admin account
 
-* email: team587@ncsu.edu
-* password: 111111
+email: team587@ncsu.edu
+
+password: 111111
   
 - run `rails db:seed` to generate fake database.
